@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  projeto-integrador-dev:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/usr/app/src
+    command: npm run dev
