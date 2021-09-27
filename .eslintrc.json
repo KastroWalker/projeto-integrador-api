@@ -10,7 +10,9 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "rules": {},
+  "rules": {
+    "trailing-comma": false
+  },
   "settings": {
     "import/resolver": {
       "node": {

@@ -1,10 +1,46 @@
 version: '3'
 
 services:
-  projeto-integrador-dev:
+  projeto-integrador-api:
     build: .
     ports:
       - '3000:3000'
     volumes:
       - ./src:/usr/app/src
     command: npm run dev
+    depends_on:
+      - projeto-integrador-pgadmin
+    networks:
+      - projeto-integrador
+
+  projeto-integrador-db:
+    image: 'postgres'
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '5432:5432'
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - projeto-integrador
+
+  projeto-integrador-pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASS}
+    ports:
+      - '16543:80'
+    depends_on:
+      - projeto-integrador-db
+    networks:
+      - projeto-integrador
+
+volumes:
+  data:
+
+networks:
+  projeto-integrador:
+    driver: bridge
