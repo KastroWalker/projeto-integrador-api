@@ -22,7 +22,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - data:/var/lib/postgresql/data
+      - ${DATA_DIRECTORY}:/var/lib/postgresql/data
     networks:
       - projeto-integrador
 
@@ -37,9 +37,6 @@ services:
       - projeto-integrador-db
     networks:
       - projeto-integrador
-
-volumes:
-  data:
 
 networks:
   projeto-integrador:
