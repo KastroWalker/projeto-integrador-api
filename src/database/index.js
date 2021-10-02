@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import Config from '../config/database';
+import Config from '../config/Config';
 
 class Database {
   constructor() {
