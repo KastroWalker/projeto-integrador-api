@@ -1,11 +1,16 @@
-const config = {
-  DB_NAME: process.env.DB_NAME,
-  DB_USER: process.env.DB_USER,
-  DB_PASS: process.env.DB_PASS,
-  DB_HOST: {
-    host: 'localhost',
-    dialect: 'postgres',
-  },
-};
+import dotenv from 'dotenv';
 
-export default config;
+class Config {
+  constructor() {
+    dotenv.config();
+    this.DB_NAME = process.env.DB_NAME;
+    this.DB_USER = process.env.DB_USER;
+    this.DB_PASS = process.env.DB_PASS;
+    this.DB_HOST = {
+      host: 'localhost',
+      dialect: 'postgres',
+    };
+  }
+}
+
+export default new Config();

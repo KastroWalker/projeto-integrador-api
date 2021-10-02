@@ -1,24 +1,24 @@
 import Sequelize from 'sequelize';
-import config from '../config/database';
+import Config from '../config/database';
 
 class Database {
   constructor() {
-    this.connect();
+    this.connection = this.connect();
   }
 
-  async connect() {
+  connect() {
     try {
       const sequelize = new Sequelize(
-        config.DB_NAME,
-        config.DB_USER,
-        config.DB_PASS,
+        Config.DB_NAME,
+        Config.DB_USER,
+        Config.DB_PASS,
         { host: 'localhost', dialect: 'postgres' }
       );
-      await sequelize.authenticate();
+      return sequelize;
     } catch (err) {
       console.error(err);
     }
   }
 }
 
-export default new Database();
+export default new Database().connection;
