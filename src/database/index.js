@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import Config from '../config/Config';
+import config from '../config/Config';
 
 class Database {
   constructor() {
@@ -8,12 +8,7 @@ class Database {
 
   connect() {
     try {
-      const sequelize = new Sequelize(
-        Config.DB_NAME,
-        Config.DB_USER,
-        Config.DB_PASS,
-        { host: 'localhost', dialect: 'postgres' }
-      );
+      const sequelize = new Sequelize(config);
       return sequelize;
     } catch (err) {
       console.error(err);

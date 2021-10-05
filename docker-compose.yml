@@ -1,17 +1,17 @@
 version: '3'
 
 services:
-  projeto-integrador-api:
-    build: .
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./src:/usr/app/src
-    command: npm run dev
-    depends_on:
-      - projeto-integrador-pgadmin
-    networks:
-      - projeto-integrador
+  # projeto-integrador-api:
+  #   build: .
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - ./src:/usr/app/src
+  #   command: npm run dev
+  #   depends_on:
+  #     - projeto-integrador-pgadmin
+  #   networks:
+  #     - projeto-integrador
 
   projeto-integrador-db:
     image: 'postgres'
