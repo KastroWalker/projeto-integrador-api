@@ -3,10 +3,10 @@ import UserModel from '../models/UserModel';
 class UserRepository {
   async insert(user) {
     try {
-      console.log(user);
-      return await UserModel.create(user);
+      const newUser = await UserModel.create(user);
+      return newUser;
     } catch (err) {
-      return err;
+      throw err;
     }
   }
 }

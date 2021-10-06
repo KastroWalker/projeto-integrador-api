@@ -7,7 +7,7 @@ class UserController {
       const newUser = await UserService.insert(data);
       res.status(201).json(newUser);
     } catch (err) {
-      res.status(err).send(err);
+      res.status(400).send(err);
     }
   }
 }
