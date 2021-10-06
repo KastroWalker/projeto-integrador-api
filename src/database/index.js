@@ -1,19 +1,6 @@
 import Sequelize from 'sequelize';
-import config from '../config/Config';
+import config from '../config/database';
 
-class Database {
-  constructor() {
-    this.connection = this.connect();
-  }
+const connection = new Sequelize(config);
 
-  connect() {
-    try {
-      const sequelize = new Sequelize(config);
-      return sequelize;
-    } catch (err) {
-      console.error(err);
-    }
-  }
-}
-
-export default new Database().connection;
+export default connection;

@@ -1,8 +1,9 @@
 import { DataTypes, Model } from 'sequelize';
 import connection from '../database';
-class UserModel extends Model {}
 
-UserModel.init(
+class User extends Model {}
+
+User.init(
   {
     name: { type: DataTypes.STRING, allowNull: false },
     username: { type: DataTypes.STRING, allowNull: false },
@@ -11,7 +12,9 @@ UserModel.init(
   {
     sequelize: connection,
     modelName: 'User',
+    tableName: 'users',
+    timestamps: false,
   }
 );
 
-export default UserModel;
+export default User;

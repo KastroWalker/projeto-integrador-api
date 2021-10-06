@@ -1,9 +1,10 @@
-import UserRepository from '../repository/UserRepository';
+import UserRepository from '../repositories/UserRepository';
 
 class UserService {
   async insert(data) {
     try {
       const { name, username, password } = data;
+      console.log(data);
       if (!name || !username || !password) {
         throw new Error('You should provider a name, username, and password');
       }
