@@ -11,7 +11,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "trailing-comma": false
+    "trailing-comma": false,
+    "no-console": ["error", { "allow": ["error"] }]
   },
   "settings": {
     "import/resolver": {
