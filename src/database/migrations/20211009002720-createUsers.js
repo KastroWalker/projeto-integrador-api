@@ -11,7 +11,7 @@ export default {
       type_id: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
-        references: { model: 'typeUsers', key: 'id' },
+        references: { model: 'type_users', key: 'id' },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
