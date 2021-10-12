@@ -16,7 +16,6 @@ class UserService {
 
       const salt = bcrypt.genSaltSync(12);
       const hash = bcrypt.hashSync(password, salt);
-      console.log(hash);
 
       const newUser = await UserRepository.insert({
         name,
