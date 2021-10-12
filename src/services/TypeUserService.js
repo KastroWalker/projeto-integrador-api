@@ -7,7 +7,7 @@ class TypeUserService {
       const newType = await TypeUserRepository.create({ name });
       return newType;
     } catch (err) {
-      throw err;
+      throw new Error(err.message);
     }
   }
 }

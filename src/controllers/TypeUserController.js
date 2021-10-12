@@ -7,7 +7,7 @@ class TypeUserController {
       const newType = await TypeUserService.create(typeUser);
       return res.status(201).json(newType);
     } catch (err) {
-      return res.status(400).json(err);
+      return res.status(400).json({ error: err.message });
     }
   }
 }

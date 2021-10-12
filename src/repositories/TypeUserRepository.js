@@ -6,7 +6,7 @@ class TypeUserRepository {
       const newType = await TypeUserModel.create(type_user);
       return newType;
     } catch (err) {
-      throw err;
+      throw new Error(err.message);
     }
   }
 }
