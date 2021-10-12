@@ -6,7 +6,19 @@ class UserRepository {
       const newUser = await UserModel.create(user);
       return newUser;
     } catch (err) {
-      throw err;
+      throw new Error(err.message);
+    }
+  }
+
+  async searchByUsername(username) {
+    try {
+      const userAlreadyExists = await UserModel.findOne({
+        where: { username },
+      });
+      return userAlreadyExists;
+    } catch (err) {
+      console.error(err);
+      throw new Error(err.message);
     }
   }
 }

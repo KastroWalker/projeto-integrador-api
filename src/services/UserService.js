@@ -7,6 +7,10 @@ class UserService {
       if (!name || !username || !password) {
         throw new Error('You should provider a name, username, and password');
       }
+      const userAlreadyExists = await UserRepository.searchByUsername(username);
+      if (userAlreadyExists) {
+        throw new Error('This username already exists');
+      }
       const newUser = await UserRepository.insert({
         name,
         username,
@@ -15,7 +19,7 @@ class UserService {
       });
       return newUser;
     } catch (err) {
-      throw err;
+      throw new Error(err.message);
     }
   }
 }
