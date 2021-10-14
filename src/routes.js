@@ -10,4 +10,6 @@ routes.post('/users/', UserController.createNewUser);
 
 routes.put('/users/:id', UserController.updateUser);
 
+routes.delete('/users/:id', UserController.delete);
+
 export default routes;

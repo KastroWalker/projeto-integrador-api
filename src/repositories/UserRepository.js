@@ -51,6 +51,15 @@ class UserRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async delete(id) {
+    try {
+      const rows = await UserModel.destroy({ where: { id } });
+      return rows;
+    } catch (err) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new UserRepository();

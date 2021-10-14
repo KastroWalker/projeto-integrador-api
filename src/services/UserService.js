@@ -78,6 +78,18 @@ class UserService {
       throw err;
     }
   }
+
+  async delete(id) {
+    try {
+      const rows = await UserRepository.delete(id);
+      if (rows <= 0) {
+        throw new ErrorHandler(400, 'delete failed');
+      }
+      return rows;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 export default new UserService();

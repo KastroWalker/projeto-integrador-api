@@ -47,6 +47,16 @@ class UserController {
       next(err);
     }
   }
+
+  async delete(req, res, next) {
+    const { id } = req.params;
+    try {
+      await UserService.delete(id);
+      res.status(200).json({ success: 'deleted successfully' });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new UserController();
