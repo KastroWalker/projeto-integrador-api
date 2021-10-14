@@ -8,4 +8,6 @@ routes.get('/users/:id', UserController.getUserById);
 
 routes.post('/users/', UserController.createNewUser);
 
+routes.put('/users/:id', UserController.updateUser);
+
 export default routes;

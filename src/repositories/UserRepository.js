@@ -39,6 +39,18 @@ class UserRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async updateUser(id, name, username) {
+    try {
+      const updatedUser = await UserModel.update(
+        { name, username },
+        { where: { id } }
+      );
+      return updatedUser;
+    } catch (err) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new UserRepository();

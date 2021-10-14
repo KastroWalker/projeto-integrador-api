@@ -53,6 +53,31 @@ class UserService {
       throw err;
     }
   }
+
+  async updateUser(id, name, username) {
+    try {
+      if (!name) {
+        throw new ErrorHandler(400, 'Please enter a name');
+      }
+
+      if (!username) {
+        throw new ErrorHandler(400, 'Please enter a username');
+      }
+
+      const userAlreadyExists = await UserRepository.searchByUsername(username);
+      if (userAlreadyExists) {
+        throw new ErrorHandler(400, 'This username already exists');
+      }
+
+      const updateUser = await UserRepository.updateUser(id, name, username);
+      console.log(updateUser);
+      if (updateUser <= 0) {
+        throw new ErrorHandler(400, 'update failed');
+      }
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 export default new UserService();
