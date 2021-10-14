@@ -8,6 +8,7 @@ class App {
     this.server = express();
     this.middleware();
     this.routes();
+    this.errorMiddleware();
   }
 
   middleware() {
@@ -17,6 +18,12 @@ class App {
 
   routes() {
     this.server.use(routes);
+  }
+
+  errorMiddleware() {
+    this.server.use((error, req, res, next) => {
+      return res.status(error.statusCode).send('Middleware');
+    });
   }
 }
 
