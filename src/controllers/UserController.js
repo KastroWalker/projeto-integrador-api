@@ -3,8 +3,7 @@ import UserService from '../services/UserService';
 class UserController {
   async createNewUser(req, res) {
     try {
-      const { name, username, password } = req.body;
-      const { type_id } = req.params;
+      const { name, username, password, type_id } = req.body;
       const newUser = await UserService.insert({
         type_id,
         name,
