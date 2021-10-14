@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
+import { handleError } from './helpers/ErrorHandler';
 import './database';
 
 class App {
@@ -22,7 +23,7 @@ class App {
 
   errorMiddleware() {
     this.server.use((error, req, res, next) => {
-      return res.status(error.statusCode).send('Middleware');
+      handleError(error, res);
     });
   }
 }
