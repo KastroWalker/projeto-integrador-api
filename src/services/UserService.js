@@ -41,6 +41,18 @@ class UserService {
       throw err;
     }
   }
+
+  async getUserById(id) {
+    try {
+      const user = await UserRepository.getUserById(id);
+      if (!user) {
+        throw new ErrorHandler(400, 'User not found');
+      }
+      return user;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 export default new UserService();
