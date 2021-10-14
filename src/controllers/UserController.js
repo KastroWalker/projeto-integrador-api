@@ -16,12 +16,12 @@ class UserController {
     }
   }
 
-  async getAllUsers(req, res) {
+  async getAllUsers(req, res, next) {
     try {
       const users = await UserService.getAllUsers();
       return res.status(200).json(users);
     } catch (err) {
-      return res.status(400).send({ error: err.message });
+      next(err);
     }
   }
 }

@@ -34,7 +34,7 @@ class UserService {
       const users = await UserRepository.getAllUsers();
       return users;
     } catch (err) {
-      throw new Error(err.message);
+      throw err;
     }
   }
 }

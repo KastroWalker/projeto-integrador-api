@@ -26,7 +26,9 @@ class UserRepository {
       const users = await UserModel.findAll();
       return users;
     } catch (err) {
-      throw new Error(err.message);
+      const error = new Error(err.message);
+      error.statusCode = 500;
+      throw error;
     }
   }
 }
