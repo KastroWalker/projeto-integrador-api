@@ -28,6 +28,15 @@ class UserService {
       throw new Error(err.message);
     }
   }
+
+  async getAllUsers() {
+    try {
+      const users = await UserRepository.getAllUsers();
+      return users;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 }
 
 export default new UserService();

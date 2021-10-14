@@ -15,6 +15,15 @@ class UserController {
       res.status(400).send({ error: err.message });
     }
   }
+
+  async getAllUsers(req, res) {
+    try {
+      const users = await UserService.getAllUsers();
+      return res.status(200).json(users);
+    } catch (err) {
+      return res.status(400).send({ error: err.message });
+    }
+  }
 }
 
 export default new UserController();

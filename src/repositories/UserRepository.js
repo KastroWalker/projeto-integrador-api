@@ -20,6 +20,15 @@ class UserRepository {
       throw new Error(err.message);
     }
   }
+
+  async getAllUsers() {
+    try {
+      const users = await UserModel.findAll();
+      return users;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
 }
 
 export default new UserRepository();
