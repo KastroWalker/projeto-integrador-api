@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import connection from '../database';
+import TypeUserModel from './TypeUserModel';
 
 class User extends Model {}
 
@@ -16,5 +17,7 @@ User.init(
     timestamps: false,
   }
 );
+
+User.belongsTo(TypeUserModel, { foreignKey: 'type_id', as: 'type_user' });
 
 export default User;

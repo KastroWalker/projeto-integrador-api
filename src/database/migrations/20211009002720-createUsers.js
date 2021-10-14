@@ -7,6 +7,14 @@ export default {
         primaryKey: true,
         autoIncrement: true,
       },
+
+      type_id: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: 'type_users', key: 'id' },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      },
       name: { type: Sequelize.DataTypes.STRING, allowNull: false },
       username: { type: Sequelize.DataTypes.STRING, allowNull: false },
       password: { type: Sequelize.DataTypes.STRING, allowNull: false },
