@@ -1,4 +1,5 @@
 import UserModel from '../models/UserModel';
+import { ErrorHandler } from '../helpers/ErrorHandler';
 
 class UserRepository {
   async insert(user) {
@@ -6,7 +7,7 @@ class UserRepository {
       const newUser = await UserModel.create(user);
       return newUser;
     } catch (err) {
-      throw new Error(err.message);
+      throw new ErrorHandler(500, 'Something went wrong in our server, sorry');
     }
   }
 
@@ -17,7 +18,7 @@ class UserRepository {
       });
       return userAlreadyExists;
     } catch (err) {
-      throw new Error(err.message);
+      throw new ErrorHandler(500, 'Something went wrong');
     }
   }
 
@@ -26,9 +27,7 @@ class UserRepository {
       const users = await UserModel.findAll();
       return users;
     } catch (err) {
-      const error = new Error(err.message);
-      error.statusCode = 500;
-      throw error;
+      throw new ErrorHandler(500, 'Something went wrong');
     }
   }
 }

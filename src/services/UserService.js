@@ -1,17 +1,21 @@
 import UserRepository from '../repositories/UserRepository';
 import bcrypt from 'bcrypt';
+import { ErrorHandler } from '../helpers/ErrorHandler';
 
 class UserService {
   async insert(data) {
     try {
       const { name, username, password, type_id } = data;
       if (!name || !username || !password) {
-        throw new Error('You should provider a name, username, and password');
+        throw new ErrorHandler(
+          400,
+          'You should provider a name, username, and password'
+        );
       }
 
       const userAlreadyExists = await UserRepository.searchByUsername(username);
       if (userAlreadyExists) {
-        throw new Error('This username already exists');
+        throw new ErrorHandler(400, 'This username already exists');
       }
 
       const salt = bcrypt.genSaltSync(12);
@@ -25,7 +29,7 @@ class UserService {
       });
       return newUser;
     } catch (err) {
-      throw new Error(err.message);
+      throw err;
     }
   }
 

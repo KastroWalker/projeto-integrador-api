@@ -1,7 +1,7 @@
 import UserService from '../services/UserService';
 
 class UserController {
-  async createNewUser(req, res) {
+  async createNewUser(req, res, next) {
     try {
       const { name, username, password, type_id } = req.body;
       const newUser = await UserService.insert({
@@ -12,7 +12,7 @@ class UserController {
       });
       res.status(201).json(newUser);
     } catch (err) {
-      res.status(400).send({ error: err.message });
+      next(err);
     }
   }
 
