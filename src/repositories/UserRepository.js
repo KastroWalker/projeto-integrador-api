@@ -60,6 +60,16 @@ class UserRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async getPassword(id) {
+    try {
+      const user = await UserModel.findByPk(id);
+      return user.password;
+    } catch (err) {
+      console.log(err);
+      throw new ErrorHandler(500, 'Something Went Wrong');
+    }
+  }
 }
 
 export default new UserRepository();
