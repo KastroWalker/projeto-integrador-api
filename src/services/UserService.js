@@ -54,14 +54,21 @@ class UserService {
     }
   }
 
-  async updateUser(id, name, username) {
+  async updateUser(id, name, username, password) {
     try {
-      if (!name) {
-        throw new ErrorHandler(400, 'Please enter a name');
+      if (!name || !username || !password) {
+        throw new ErrorHandler(
+          400,
+          'You should provider a name, username and password'
+        );
       }
 
-      if (!username) {
-        throw new ErrorHandler(400, 'Please enter a username');
+      const hashDB = await UserRepository.getPassword(id);
+
+      const passOK = bcrypt.compareSync(password, hashDB);
+
+      if (!passOK) {
+        throw new ErrorHandler(401, 'Invalid password');
       }
 
       const userAlreadyExists = await UserRepository.searchByUsername(username);
@@ -70,7 +77,6 @@ class UserService {
       }
 
       const updateUser = await UserRepository.updateUser(id, name, username);
-      console.log(updateUser);
       if (updateUser <= 0) {
         throw new ErrorHandler(400, 'update failed');
       }
