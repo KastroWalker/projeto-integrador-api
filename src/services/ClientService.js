@@ -1,8 +1,8 @@
-import UserRepository from '../repositories/UserRepository';
+import ClientRepository from '../repositories/ClientRepository';
 import bcrypt from 'bcrypt';
 import { ErrorHandler } from '../helpers/ErrorHandler';
 
-class UserService {
+class ClientService {
   async insert(data) {
     try {
       const { name, username, password, type_id } = data;
@@ -13,48 +13,53 @@ class UserService {
         );
       }
 
-      const userAlreadyExists = await UserRepository.searchByUsername(username);
-      if (userAlreadyExists) {
+      const clientAlreadyExists = await ClientRepository.searchByUsername(
+        username
+      );
+      if (clientAlreadyExists) {
         throw new ErrorHandler(400, 'This username already exists');
       }
 
       const salt = bcrypt.genSaltSync(12);
       const hash = bcrypt.hashSync(password, salt);
 
-      const newUser = await UserRepository.insert({
+      let newClient = await ClientRepository.insert({
         name,
         username,
         password: hash,
         type_id,
       });
-      return newUser;
+
+      delete newClient.dataValues.password;
+
+      return newClient;
     } catch (err) {
       throw err;
     }
   }
 
-  async getAllUsers() {
+  async getAll() {
     try {
-      const users = await UserRepository.getAllUsers();
-      return users;
+      const clients = await ClientRepository.getAll();
+      return clients;
     } catch (err) {
       throw err;
     }
   }
 
-  async getUserById(id) {
+  async getById(id) {
     try {
-      const user = await UserRepository.getUserById(id);
-      if (!user) {
-        throw new ErrorHandler(400, 'User not found');
+      const client = await ClientRepository.getById(id);
+      if (!client) {
+        throw new ErrorHandler(400, 'Client not found');
       }
-      return user;
+      return client;
     } catch (err) {
       throw err;
     }
   }
 
-  async updateUser(id, name, username, password) {
+  async update(id, name, username, password) {
     try {
       if (!name || !username || !password) {
         throw new ErrorHandler(
@@ -63,7 +68,7 @@ class UserService {
         );
       }
 
-      const hashDB = await UserRepository.getPassword(id);
+      const hashDB = await ClientRepository.getPassword(id);
 
       const passOK = bcrypt.compareSync(password, hashDB);
 
@@ -71,13 +76,15 @@ class UserService {
         throw new ErrorHandler(401, 'Invalid password');
       }
 
-      const userAlreadyExists = await UserRepository.searchByUsername(username);
-      if (userAlreadyExists) {
+      const clientAlreadyExists = await ClientRepository.searchByUsername(
+        username
+      );
+      if (clientAlreadyExists) {
         throw new ErrorHandler(400, 'This username already exists');
       }
 
-      const updateUser = await UserRepository.updateUser(id, name, username);
-      if (updateUser <= 0) {
+      const update = await ClientRepository.update(id, name, username);
+      if (update <= 0) {
         throw new ErrorHandler(400, 'update failed');
       }
     } catch (err) {
@@ -87,7 +94,7 @@ class UserService {
 
   async delete(id) {
     try {
-      const rows = await UserRepository.delete(id);
+      const rows = await ClientRepository.delete(id);
       if (rows <= 0) {
         throw new ErrorHandler(400, 'delete failed');
       }
@@ -98,4 +105,4 @@ class UserService {
   }
 }
 
-export default new UserService();
+export default new ClientService();

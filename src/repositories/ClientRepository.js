@@ -1,11 +1,11 @@
-import UserModel from '../models/UserModel';
+import ClientModel from '../models/ClientModel';
 import { ErrorHandler } from '../helpers/ErrorHandler';
 
-class UserRepository {
-  async insert(user) {
+class ClientRepository {
+  async insert(client) {
     try {
-      const newUser = await UserModel.create(user);
-      return newUser;
+      const newClient = await ClientModel.create(client);
+      return newClient;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong in our server, sorry');
     }
@@ -13,40 +13,40 @@ class UserRepository {
 
   async searchByUsername(username) {
     try {
-      const userAlreadyExists = await UserModel.findOne({
+      const clientAlreadyExists = await ClientModel.findOne({
         where: { username },
       });
-      return userAlreadyExists;
+      return clientAlreadyExists;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
 
-  async getAllUsers() {
+  async getAll() {
     try {
-      const users = await UserModel.findAll();
-      return users;
+      const clients = await ClientModel.findAll();
+      return clients;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
 
-  async getUserById(id) {
+  async getById(id) {
     try {
-      const user = await UserModel.findByPk(id);
-      return user;
+      const client = await ClientModel.findByPk(id);
+      return client;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
 
-  async updateUser(id, name, username) {
+  async update(id, name, username) {
     try {
-      const updatedUser = await UserModel.update(
+      const updatedClient = await ClientModel.update(
         { name, username },
         { where: { id } }
       );
-      return updatedUser;
+      return updatedClient;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong');
     }
@@ -54,7 +54,7 @@ class UserRepository {
 
   async delete(id) {
     try {
-      const rows = await UserModel.destroy({ where: { id } });
+      const rows = await ClientModel.destroy({ where: { id } });
       return rows;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong');
@@ -63,8 +63,8 @@ class UserRepository {
 
   async getPassword(id) {
     try {
-      const user = await UserModel.findByPk(id);
-      return user.password;
+      const client = await ClientModel.findByPk(id);
+      return client.password;
     } catch (err) {
       console.log(err);
       throw new ErrorHandler(500, 'Something Went Wrong');
@@ -72,4 +72,4 @@ class UserRepository {
   }
 }
 
-export default new UserRepository();
+export default new ClientRepository();

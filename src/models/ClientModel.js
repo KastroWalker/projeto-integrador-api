@@ -1,10 +1,9 @@
 import { DataTypes, Model } from 'sequelize';
 import connection from '../database';
-import TypeUserModel from './TypeUserModel';
 
-class User extends Model {}
+class Client extends Model {}
 
-User.init(
+Client.init(
   {
     name: { type: DataTypes.STRING, allowNull: false },
     username: { type: DataTypes.STRING, allowNull: false },
@@ -12,12 +11,10 @@ User.init(
   },
   {
     sequelize: connection,
-    modelName: 'User',
-    tableName: 'users',
+    modelName: 'Client',
+    tableName: 'clients',
     timestamps: false,
   }
 );
 
-User.belongsTo(TypeUserModel, { foreignKey: 'type_id', as: 'type_user' });
-
-export default User;
+export default Client;

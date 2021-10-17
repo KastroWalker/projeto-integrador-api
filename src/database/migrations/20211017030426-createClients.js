@@ -1,19 +1,13 @@
-export default {
+'use strict';
+
+module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('clients', {
       id: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
-      },
-
-      type_id: {
-        type: Sequelize.DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: 'type_users', key: 'id' },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       },
       name: { type: Sequelize.DataTypes.STRING, allowNull: false },
       username: { type: Sequelize.DataTypes.STRING, allowNull: false },
@@ -22,6 +16,6 @@ export default {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('clients');
   },
 };
