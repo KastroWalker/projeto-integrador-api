@@ -1,9 +1,9 @@
-import ClientRepository from '../repositories/ClientRepository';
 import MerchantRepository from '../repositories/MerchantRepository';
+import ClientRepository from '../repositories/ClientRepository';
 import bcrypt from 'bcrypt';
 import { ErrorHandler } from '../helpers/ErrorHandler';
 
-class ClientService {
+class MerchantService {
   async insert(data) {
     try {
       const { name, username, password, type_id } = data;
@@ -21,9 +21,7 @@ class ClientService {
         throw new ErrorHandler(400, 'This username already exists');
       }
 
-      usernameAlreadyExists = await MerchantRepository.searchByUsername(
-        username
-      );
+      usernameAlreadyExists = await ClientRepository.searchByUsername(username);
       if (usernameAlreadyExists) {
         throw new ErrorHandler(400, 'This username already exists');
       }
@@ -31,16 +29,16 @@ class ClientService {
       const salt = bcrypt.genSaltSync(12);
       const hash = bcrypt.hashSync(password, salt);
 
-      let newClient = await ClientRepository.insert({
+      let newMerchant = await MerchantRepository.insert({
         name,
         username,
         password: hash,
         type_id,
       });
 
-      delete newClient.dataValues.password;
+      delete newMerchant.dataValues.password;
 
-      return newClient;
+      return newMerchant;
     } catch (err) {
       throw err;
     }
@@ -48,8 +46,8 @@ class ClientService {
 
   async getAll() {
     try {
-      const clients = await ClientRepository.getAll();
-      return clients;
+      const merchants = await MerchantRepository.getAll();
+      return merchants;
     } catch (err) {
       throw err;
     }
@@ -57,11 +55,11 @@ class ClientService {
 
   async getById(id) {
     try {
-      const client = await ClientRepository.getById(id);
-      if (!client) {
-        throw new ErrorHandler(400, 'Client not found');
+      const merchant = await MerchantRepository.getById(id);
+      if (!merchant) {
+        throw new ErrorHandler(400, 'Merchant not found');
       }
-      return client;
+      return merchant;
     } catch (err) {
       throw err;
     }
@@ -76,7 +74,7 @@ class ClientService {
         );
       }
 
-      const hashDB = await ClientRepository.getPassword(id);
+      const hashDB = await MerchantRepository.getPassword(id);
 
       const passOK = bcrypt.compareSync(password, hashDB);
 
@@ -84,21 +82,19 @@ class ClientService {
         throw new ErrorHandler(401, 'Invalid password');
       }
 
-      let usernameAlreadyExists = await ClientRepository.searchByUsername(
+      let usernameAlreadyExists = await MerchantRepository.searchByUsername(
         username
       );
       if (usernameAlreadyExists) {
         throw new ErrorHandler(400, 'This username already exists');
       }
 
-      usernameAlreadyExists = await MerchantRepository.searchByUsername(
-        username
-      );
+      usernameAlreadyExists = await ClientRepository.searchByUsername(username);
       if (usernameAlreadyExists) {
         throw new ErrorHandler(400, 'This username already exists');
       }
 
-      const update = await ClientRepository.update(id, name, username);
+      const update = await MerchantRepository.update(id, name, username);
       if (update <= 0) {
         throw new ErrorHandler(400, 'update failed');
       }
@@ -109,7 +105,7 @@ class ClientService {
 
   async delete(id) {
     try {
-      const rows = await ClientRepository.delete(id);
+      const rows = await MerchantRepository.delete(id);
       if (rows <= 0) {
         throw new ErrorHandler(400, 'delete failed');
       }
@@ -120,4 +116,4 @@ class ClientService {
   }
 }
 
-export default new ClientService();
+export default new MerchantService();
