@@ -1,15 +1,19 @@
 import { Router } from 'express';
-import UserController from './controllers/UserController';
+import ClientController from './controllers/ClientController';
+import MerchantController from './controllers/MerchantController';
 
 const routes = new Router();
 
-routes.get('/users', UserController.getAllUsers);
-routes.get('/users/:id', UserController.getUserById);
+routes.get('/clients', ClientController.getAll);
+routes.get('/clients/:id', ClientController.getById);
+routes.post('/clients', ClientController.create);
+routes.put('/clients/:id', ClientController.update);
+routes.delete('/clients/:id', ClientController.delete);
 
-routes.post('/users/', UserController.createNewUser);
-
-routes.put('/users/:id', UserController.updateUser);
-
-routes.delete('/users/:id', UserController.delete);
+routes.get('/merchants', MerchantController.getAll);
+routes.get('/merchants/:id', MerchantController.getById);
+routes.post('/merchants', MerchantController.create);
+routes.put('/merchants/:id', MerchantController.update);
+routes.delete('/merchants/:id', MerchantController.delete);
 
 export default routes;

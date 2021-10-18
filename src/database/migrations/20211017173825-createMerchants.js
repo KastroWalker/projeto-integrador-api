@@ -1,6 +1,8 @@
-export default {
+'use strict';
+
+module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('type_users', {
+    return queryInterface.createTable('merchants', {
       id: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
@@ -8,10 +10,12 @@ export default {
         autoIncrement: true,
       },
       name: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      username: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      password: { type: Sequelize.DataTypes.STRING, allowNull: false },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('type_users');
+    return queryInterface.dropTable('merchants');
   },
 };
