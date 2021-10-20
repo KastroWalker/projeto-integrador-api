@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import ClientController from './controllers/ClientController';
 import MerchantController from './controllers/MerchantController';
+import StoreController from './controllers/StoreController';
 
 const routes = new Router();
 
@@ -13,6 +14,7 @@ routes.delete('/clients/:id', ClientController.delete);
 routes.get('/merchants', MerchantController.getAll);
 routes.get('/merchants/:id', MerchantController.getById);
 routes.post('/merchants', MerchantController.create);
+routes.post('/merchants/:merchant_id/stores', StoreController.insert);
 routes.put('/merchants/:id', MerchantController.update);
 routes.delete('/merchants/:id', MerchantController.delete);
 
