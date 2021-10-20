@@ -9,7 +9,7 @@ export default {
       },
       name: { type: Sequelize.DataTypes.STRING, allowNull: false },
       description: { type: Sequelize.DataTypes.STRING, allowNull: false },
-      status: { type: Sequelize.DataTypes.BOOLEAN, allowNull: false },
+      status: { type: Sequelize.DataTypes.BOOLEAN },
       merchant_id: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
