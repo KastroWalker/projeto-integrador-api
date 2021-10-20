@@ -13,10 +13,10 @@ export default {
       merchant_id: {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         references: { model: 'merchants', key: 'id' },
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
     });
   },
 
