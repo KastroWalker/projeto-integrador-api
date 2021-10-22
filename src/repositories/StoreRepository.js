@@ -22,6 +22,15 @@ class StoreRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async getMerchantId(id) {
+    try {
+      const store = await StoreModel.findByPk(id);
+      return store.merchant_id;
+    } catch (err) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new StoreRepository();
