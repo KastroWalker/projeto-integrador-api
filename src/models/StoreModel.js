@@ -12,12 +12,11 @@ Store.init(
   },
   {
     sequelize: connection,
-    timestamps: false,
     modelName: 'Store',
     tableName: 'stores',
   }
 );
 
-Store.belongsTo(MerchantModel, { foreignKey: 'merchant_id', as: 'owner' });
+Store.belongsTo(MerchantModel, { foreignKey: 'merchantId', as: 'owner' });
 
 export default Store;

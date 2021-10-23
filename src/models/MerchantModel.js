@@ -13,7 +13,6 @@ Merchant.init(
     sequelize: connection,
     modelName: 'Merchant',
     tableName: 'merchants',
-    timestamps: false,
   }
 );
 

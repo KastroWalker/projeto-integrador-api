@@ -13,7 +13,6 @@ Client.init(
     sequelize: connection,
     modelName: 'Client',
     tableName: 'clients',
-    timestamps: false,
   }
 );
 
