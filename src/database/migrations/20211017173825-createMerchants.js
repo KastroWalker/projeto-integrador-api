@@ -8,8 +8,11 @@ export default {
         autoIncrement: true,
       },
       name: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      email: { type: Sequelize.DataTypes.STRING, allowNull: false },
       username: { type: Sequelize.DataTypes.STRING, allowNull: false },
       password: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      createdAt: { type: Sequelize.DataTypes.DATE, allowNull: false },
+      updatedAt: { type: Sequelize.DataTypes.DATE, allowNull: false },
     });
   },
 
