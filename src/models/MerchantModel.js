@@ -1,4 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
+import StoreModel from './StoreModel';
 import connection from '../database';
 
 class Merchant extends Model {}
@@ -16,5 +17,7 @@ Merchant.init(
     tableName: 'merchants',
   }
 );
+
+Merchant.hasMany(StoreModel, { foreignKey: 'merchantId', as: 'stores' });
 
 export default Merchant;
