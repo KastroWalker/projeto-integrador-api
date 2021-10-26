@@ -1,16 +1,23 @@
 export default {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('addresses', {
-      id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-      road: { type: Sequelize.STRING, allowNull: false },
-      number: { type: Sequelize.STRING, allowNull: false },
-      district: { type: Sequelize.STRING, allowNull: false },
-      city: { type: Sequelize.STRING, allowNull: false },
-      zipCode: { type: Sequelize.STRING, allowNull: false },
-      complement: { type: Sequelize.STRING, allowNull: true },
-      coordinate: { type: Sequelize.GEOMETRY('POINT', 4326), allowNull: true },
-      createdAt: { type: Sequelize.DATE, allowNull: false },
-      updatedAt: { type: Sequelize.DATE, allowNull: false },
+      id: {
+        type: Sequelize.DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      road: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      number: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      district: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      city: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      zipCode: { type: Sequelize.DataTypes.STRING, allowNull: false },
+      complement: { type: Sequelize.DataTypes.STRING, allowNull: true },
+      coordinate: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: true,
+      },
+      createdAt: { type: Sequelize.DataTypes.DATE, allowNull: false },
+      updatedAt: { type: Sequelize.DataTypes.DATE, allowNull: false },
     });
   },
 
