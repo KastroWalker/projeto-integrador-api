@@ -14,10 +14,10 @@ TypePurchase.init(
   }
 );
 
-TypePurchase.belongsToMany(StoreModel, {
-  foreignKey: 'typePurchaseId',
-  through: 'purchaseTypesStores',
-  as: 'stores',
-});
+// TypePurchase.belongsToMany(StoreModel, {
+//   foreignKey: 'typePurchaseId',
+//   through: 'purchaseTypesStores',
+//   as: 'stores',
+// });
 
 export default TypePurchase;

@@ -17,6 +17,6 @@ Address.init(
   { sequelize: connection, modelName: 'Address', tableName: 'addresses' }
 );
 
-Address.hasOne(StoreModel, { foreignKey: 'addressId', as: 'store' });
+// Address.hasOne(StoreModel, { foreignKey: 'addressId', as: 'store' });
 
 export default Address;
