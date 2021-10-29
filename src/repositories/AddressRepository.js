@@ -7,7 +7,6 @@ class AddressRepository {
       const createdAddress = await AddressModel.create(address);
       return createdAddress;
     } catch (err) {
-      console.log(err);
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
