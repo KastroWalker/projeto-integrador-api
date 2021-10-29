@@ -1,23 +1,26 @@
 import { DataTypes, Model } from 'sequelize';
-import connection from '../database';
-import StoreModel from './StoreModel';
 
-class TypePurchase extends Model {}
-TypePurchase.init(
-  {
-    name: { type: DataTypes.STRING, allowNull: false },
-  },
-  {
-    sequelize: connection,
-    modelName: 'TypePurchase',
-    tableName: 'typePurchases',
+class TypePurchase extends Model {
+  static init(sequelize) {
+    super.init(
+      {
+        name: { type: DataTypes.STRING, allowNull: false },
+      },
+      {
+        sequelize,
+        modelName: 'TypePurchase',
+        tableName: 'typePurchases',
+      }
+    );
   }
-);
 
-TypePurchase.belongsToMany(StoreModel, {
-  foreignKey: 'typePurchaseId',
-  through: 'purchaseTypesStores',
-  as: 'stores',
-});
+  static associate(models) {
+    this.belongsToMany(models.Store, {
+      foreignKey: 'typePurchaseId',
+      through: 'purchaseTypesStores',
+      as: 'stores',
+    });
+  }
+}
 
 export default TypePurchase;
