@@ -1,20 +1,21 @@
 import { DataTypes, Model } from 'sequelize';
-import connection from '../database';
 
-class Client extends Model {}
-
-Client.init(
-  {
-    name: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false },
-    username: { type: DataTypes.STRING, allowNull: false },
-    password: { type: DataTypes.STRING, allowNull: false },
-  },
-  {
-    sequelize: connection,
-    modelName: 'Client',
-    tableName: 'clients',
+class Client extends Model {
+  static init(sequelize) {
+    super.init(
+      {
+        name: { type: DataTypes.STRING, allowNull: false },
+        email: { type: DataTypes.STRING, allowNull: false },
+        username: { type: DataTypes.STRING, allowNull: false },
+        password: { type: DataTypes.STRING, allowNull: false },
+      },
+      {
+        sequelize,
+        modelName: 'Client',
+        tableName: 'clients',
+      }
+    );
   }
-);
+}
 
 export default Client;
