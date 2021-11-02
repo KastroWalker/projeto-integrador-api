@@ -26,6 +26,16 @@ class StoreController {
       next(error);
     }
   }
+
+  async getById(req, res, next) {
+    const { id } = req.params;
+    try {
+      const store = await StoreService.getById(id);
+      res.status(200).json(store);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new StoreController();

@@ -37,6 +37,19 @@ class StoreService {
       throw error;
     }
   }
+
+  async getById(id) {
+    try {
+      const store = await StoreRepository.getById(id);
+      if (!store) {
+        throw new ErrorHandler(404, 'Store not found');
+      }
+
+      return store;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new StoreService();

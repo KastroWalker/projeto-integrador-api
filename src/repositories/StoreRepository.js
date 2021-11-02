@@ -11,6 +11,19 @@ class StoreRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async getById(id) {
+    try {
+      if (!id) {
+        throw new ErrorHandler(400, 'Id is required');
+      }
+
+      const store = await StoreModel.findByPk(id);
+      return store;
+    } catch (error) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new StoreRepository();
