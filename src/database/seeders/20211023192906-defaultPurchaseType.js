@@ -8,8 +8,6 @@ export default {
       ],
       {}
     );
-
-    await queryInterface;
   },
 
   down: async (queryInterface, Sequelize) => {
