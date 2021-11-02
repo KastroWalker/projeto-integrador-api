@@ -16,8 +16,8 @@ class TypePurchase extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Store, {
+      through: 'typePurchasesStores',
       foreignKey: 'typePurchaseId',
-      through: 'purchaseTypesStores',
       as: 'stores',
     });
   }

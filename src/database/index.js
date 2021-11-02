@@ -16,7 +16,7 @@ TypePurchaseModel.init(connection);
 
 AddressModel.associate(connection.models);
 MerchantModel.associate(connection.models);
-StoreModel.associate(connection.models);
 TypePurchaseModel.associate(connection.models);
+StoreModel.associate(connection.models);
 
 export default connection;
