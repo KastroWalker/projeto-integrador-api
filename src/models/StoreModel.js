@@ -15,13 +15,13 @@ class Store extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Merchant, { foreignKey: 'MerchantId', as: 'user' });
-    this.belongsTo(models.Address, { foreignKey: 'addressId', as: 'address' });
     this.belongsToMany(models.TypePurchase, {
-      foreignKey: 'storeId',
       through: 'purchaseTypesStores',
+      foreignKey: 'storeId',
       as: 'typePurchases',
     });
+    this.belongsTo(models.Merchant, { foreignKey: 'merchantId', as: 'owner' });
+    this.belongsTo(models.Address, { foreignKey: 'addressId', as: 'address' });
   }
 }
 
