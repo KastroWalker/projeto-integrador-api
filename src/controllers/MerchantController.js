@@ -3,12 +3,13 @@ import MerchantService from '../services/MerchantService';
 class MerchantController {
   async create(req, res, next) {
     try {
-      const { name, username, password } = req.body;
-      const newMerchant = await MerchantService.insert({
+      const { name, username, password, email } = req.body;
+      const newMerchant = await MerchantService.insert(
         name,
         username,
         password,
-      });
+        email
+      );
       res.status(201).json(newMerchant);
     } catch (err) {
       next(err);

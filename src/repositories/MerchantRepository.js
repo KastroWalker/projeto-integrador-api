@@ -40,10 +40,11 @@ class MerchantRepository {
     }
   }
 
-  async update(id, name, username) {
+  async update(updatedMerchant) {
     try {
+      const { name, username, email, id } = updatedMerchant;
       const updatedMerchant = await MerchantModel.update(
-        { name, username },
+        { name, username, email },
         { where: { id } }
       );
       return updatedMerchant;
