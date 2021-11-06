@@ -4,13 +4,12 @@ import bcrypt from 'bcrypt';
 import { ErrorHandler } from '../helpers/ErrorHandler';
 
 class MerchantService {
-  async insert(data) {
+  async insert(name, username, password, email) {
     try {
-      const { name, username, password, type_id } = data;
-      if (!name || !username || !password) {
+      if (!name || !username || !password || !email) {
         throw new ErrorHandler(
           400,
-          'You should provider a name, username, and password'
+          'You should provider a name, username, email and password'
         );
       }
 
@@ -29,11 +28,11 @@ class MerchantService {
       const salt = bcrypt.genSaltSync(12);
       const hash = bcrypt.hashSync(password, salt);
 
-      let newMerchant = await MerchantRepository.insert({
+      const newMerchant = await MerchantRepository.insert({
         name,
         username,
         password: hash,
-        type_id,
+        email,
       });
 
       delete newMerchant.dataValues.password;
@@ -65,9 +64,9 @@ class MerchantService {
     }
   }
 
-  async update(id, name, username, password) {
+  async update(id, name, username, password, email) {
     try {
-      if (!name || !username || !password) {
+      if (!name || !username || !password || !email) {
         throw new ErrorHandler(
           400,
           'You should provider a name, username and password'
@@ -94,7 +93,12 @@ class MerchantService {
         throw new ErrorHandler(400, 'This username already exists');
       }
 
-      const update = await MerchantRepository.update(id, name, username);
+      const update = await MerchantRepository.update({
+        id,
+        name,
+        username,
+        email,
+      });
       if (update <= 0) {
         throw new ErrorHandler(400, 'update failed');
       }

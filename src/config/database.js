@@ -8,4 +8,7 @@ module.exports = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   logging: false,
+  define: {
+    timestamp: true,
+  },
 };
