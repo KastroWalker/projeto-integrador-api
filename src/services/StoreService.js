@@ -50,6 +50,15 @@ class StoreService {
       throw error;
     }
   }
+
+  async getAll() {
+    try {
+      const stores = await StoreRepository.getAll();
+      return stores;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new StoreService();

@@ -24,6 +24,15 @@ class StoreRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async getAll() {
+    try {
+      const stores = await StoreModel.findAll();
+      return stores;
+    } catch (error) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new StoreRepository();

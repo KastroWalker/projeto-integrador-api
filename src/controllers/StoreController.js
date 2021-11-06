@@ -36,6 +36,15 @@ class StoreController {
       next(error);
     }
   }
+
+  async getAll(req, res, next) {
+    try {
+      const stores = await StoreService.getAll();
+      res.status(200).json(stores);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new StoreController();
