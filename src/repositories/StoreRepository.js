@@ -42,6 +42,15 @@ class StoreRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async delete(id) {
+    try {
+      const deletedStore = await StoreModel.destroy({ where: { id } });
+      return deletedStore;
+    } catch (error) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new StoreRepository();

@@ -56,6 +56,16 @@ class StoreController {
       next(error);
     }
   }
+
+  async delete(req, res, next) {
+    const { id } = req.params;
+    try {
+      await StoreService.delete(id);
+      res.status(200).json({ message: 'Store deleted successfully' });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default new StoreController();

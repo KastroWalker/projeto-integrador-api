@@ -85,6 +85,19 @@ class StoreService {
       throw error;
     }
   }
+
+  async delete(id) {
+    try {
+      const deletedStore = await StoreRepository.delete(id);
+      if (deletedStore <= 0) {
+        throw new ErrorHandler(404, 'Store not found');
+      }
+
+      return deletedStore;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new StoreService();
