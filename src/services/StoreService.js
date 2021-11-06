@@ -59,6 +59,32 @@ class StoreService {
       throw error;
     }
   }
+
+  async update(id, store) {
+    try {
+      const { name, description, status, openedAt, closedAt, merchantId } =
+        store;
+
+      if (
+        !name ||
+        !description ||
+        !status ||
+        !openedAt ||
+        !closedAt ||
+        !merchantId
+      ) {
+        throw new ErrorHandler(400, 'Invalid store data');
+      }
+      const updatedStore = await StoreRepository.update(id, store);
+      if (updatedStore <= 0) {
+        throw new ErrorHandler(404, 'Store not found');
+      }
+
+      return updatedStore;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new StoreService();

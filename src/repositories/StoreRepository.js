@@ -33,6 +33,15 @@ class StoreRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async update(id, store) {
+    try {
+      const updatedStore = await StoreModel.update(store, { where: { id } });
+      return updatedStore;
+    } catch (error) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new StoreRepository();
