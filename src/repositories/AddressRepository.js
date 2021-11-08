@@ -10,6 +10,15 @@ class AddressRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async getAll() {
+    try {
+      const addresses = await AddressModel.findAll();
+      return addresses;
+    } catch (err) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new AddressRepository();

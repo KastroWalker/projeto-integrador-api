@@ -19,6 +19,15 @@ class AddressController {
       next(err);
     }
   }
+
+  async getAll(req, res, next) {
+    try {
+      const addresses = await AddressService.getAll();
+      return res.status(200).json(addresses);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new AddressController();

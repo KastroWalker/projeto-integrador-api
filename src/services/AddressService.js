@@ -22,6 +22,19 @@ class AddressService {
       throw err;
     }
   }
+
+  async getAll() {
+    try {
+      const addresses = await AddressRepository.getAll();
+      if (!addresses.length <= 0) {
+        throw new ErrorHandler(404, 'No addresses found');
+      }
+
+      return addresses;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 export default new AddressService();
