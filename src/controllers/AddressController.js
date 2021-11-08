@@ -28,6 +28,17 @@ class AddressController {
       next(err);
     }
   }
+
+  async update(req, res, next) {
+    try {
+      const { id } = req.params;
+      const address = req.body;
+      const updatedAddress = await AddressService.update(id, address);
+      return res.status(200).json(updatedAddress);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new AddressController();

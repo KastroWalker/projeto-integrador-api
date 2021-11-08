@@ -35,6 +35,23 @@ class AddressService {
       throw err;
     }
   }
+
+  async update(id, address) {
+    const { road, number, district, city, zipCode } = address;
+    try {
+      if (!id || !road || !number || !district || !city || !zipCode) {
+        throw new ErrorHandler(400, 'Provide the required data');
+      }
+      const updatedAddress = await AddressRepository.update(id, address);
+      if (updatedAddress <= 0) {
+        throw new ErrorHandler(400, 'Update failed ');
+      }
+
+      return address;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 export default new AddressService();

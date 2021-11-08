@@ -19,6 +19,17 @@ class AddressRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async update(id, address) {
+    try {
+      const updatedAddress = await AddressModel.update(address, {
+        where: { id },
+      });
+      return updatedAddress;
+    } catch (err) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new AddressRepository();
