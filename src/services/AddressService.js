@@ -26,7 +26,7 @@ class AddressService {
   async getAll() {
     try {
       const addresses = await AddressRepository.getAll();
-      if (!addresses.length <= 0) {
+      if (addresses.length <= 0) {
         throw new ErrorHandler(404, 'No addresses found');
       }
 
@@ -48,6 +48,22 @@ class AddressService {
       }
 
       return address;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async delete(id) {
+    try {
+      if (!id) {
+        throw new ErrorHandler(400, 'Provide the required data');
+      }
+      const deletedAddress = await AddressRepository.delete(id);
+      if (deletedAddress <= 0) {
+        throw new ErrorHandler(400, 'Delete failed ');
+      }
+
+      return { message: 'Address deleted' };
     } catch (err) {
       throw err;
     }

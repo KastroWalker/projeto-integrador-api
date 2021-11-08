@@ -39,6 +39,16 @@ class AddressController {
       next(err);
     }
   }
+
+  async delete(req, res, next) {
+    try {
+      const { id } = req.params;
+      await AddressService.delete(id);
+      return res.status(200).json({ message: 'Address deleted' });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new AddressController();

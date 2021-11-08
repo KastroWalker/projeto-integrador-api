@@ -30,6 +30,17 @@ class AddressRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async delete(id) {
+    try {
+      const deletedAddress = await AddressModel.destroy({
+        where: { id },
+      });
+      return deletedAddress;
+    } catch (err) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new AddressRepository();
