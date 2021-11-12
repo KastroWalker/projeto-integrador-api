@@ -7,6 +7,7 @@ routes.get('/merchants', MerchantController.getAll);
 routes.get('/merchants/:id', MerchantController.getById);
 
 routes.post('/merchants', MerchantController.create);
+routes.post('/merchants/authenticate', MerchantController.authenticate);
 
 routes.put('/merchants/:id', MerchantController.update);
 

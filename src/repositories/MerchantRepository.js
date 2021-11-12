@@ -43,11 +43,11 @@ class MerchantRepository {
   async update(updatedMerchant) {
     try {
       const { name, username, email, id } = updatedMerchant;
-      const updatedMerchant = await MerchantModel.update(
+      const merchant = await MerchantModel.update(
         { name, username, email },
         { where: { id } }
       );
-      return updatedMerchant;
+      return merchant;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong');
     }

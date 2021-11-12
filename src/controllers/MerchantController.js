@@ -57,6 +57,16 @@ class MerchantController {
       next(err);
     }
   }
+
+  async authenticate(req, res, next) {
+    const { username, password } = req.body;
+    try {
+      const tokenJTW = await MerchantService.authenticate(username, password);
+      res.status(200).json(tokenJTW);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new MerchantController();

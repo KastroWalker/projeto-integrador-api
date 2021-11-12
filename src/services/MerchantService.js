@@ -1,6 +1,7 @@
 import MerchantRepository from '../repositories/MerchantRepository';
 import ClientRepository from '../repositories/ClientRepository';
 import bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
 import { ErrorHandler } from '../helpers/ErrorHandler';
 
 class MerchantService {
@@ -46,7 +47,13 @@ class MerchantService {
   async getAll() {
     try {
       const merchants = await MerchantRepository.getAll();
-      return merchants;
+
+      const merchantsWithOutPassword = merchants.map((merchant) => {
+        delete merchant.dataValues.password;
+        return merchant;
+      });
+
+      return merchantsWithOutPassword;
     } catch (err) {
       throw err;
     }
@@ -114,6 +121,32 @@ class MerchantService {
         throw new ErrorHandler(400, 'delete failed');
       }
       return rows;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async authenticate(username, password) {
+    try {
+      const merchant = await MerchantRepository.searchByUsername(username);
+      if (!merchant) {
+        throw new ErrorHandler(404, 'Merchant not found');
+      }
+
+      const passOK = bcrypt.compareSync(password, merchant.password);
+
+      if (!passOK) {
+        throw new ErrorHandler(401, 'Invalid password');
+      }
+
+      delete merchant.password;
+      console.log(merchant);
+
+      const token = jwt.sign({ merchant }, process.env.SECRET_KEY, {
+        expiresIn: 300,
+      });
+
+      return { auth: true, token };
     } catch (err) {
       throw err;
     }
