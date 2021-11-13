@@ -71,16 +71,24 @@ class MerchantService {
     }
   }
 
-  async update(id, name, username, password, email) {
+  async update(id, updatedMerchant) {
     try {
+      const { name, username, password, email } = updatedMerchant;
+      console.log(password);
       if (!name || !username || !password || !email) {
         throw new ErrorHandler(
           400,
-          'You should provider a name, username and password'
+          'You should provider a name, username, email and password'
         );
       }
 
+      const merchant = await MerchantRepository.getById(id);
+      if (!merchant) {
+        throw new ErrorHandler(404, 'Merchant not found');
+      }
+
       const hashDB = await MerchantRepository.getPassword(id);
+      console.log(hashDB);
 
       const passOK = bcrypt.compareSync(password, hashDB);
 
@@ -100,15 +108,14 @@ class MerchantService {
         throw new ErrorHandler(400, 'This username already exists');
       }
 
-      const update = await MerchantRepository.update({
-        id,
-        name,
-        username,
-        email,
-      });
+      delete updatedMerchant.password;
+
+      const update = await MerchantRepository.update(id, updatedMerchant);
       if (update <= 0) {
         throw new ErrorHandler(400, 'update failed');
       }
+
+      return updatedMerchant;
     } catch (err) {
       throw err;
     }
@@ -146,7 +153,7 @@ class MerchantService {
         expiresIn: 300,
       });
 
-      return { auth: true, token };
+      return token;
     } catch (err) {
       throw err;
     }

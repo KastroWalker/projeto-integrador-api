@@ -38,11 +38,11 @@ class MerchantController {
 
   async update(req, res, next) {
     const { id } = req.params;
-    const { name, username, password } = req.body;
+    const updatedMerchant = req.body;
 
     try {
-      await MerchantService.update(id, name, username, password);
-      res.status(200).json({ name, username });
+      const merchant = await MerchantService.update(id, updatedMerchant);
+      res.status(200).json(merchant);
     } catch (err) {
       next(err);
     }
