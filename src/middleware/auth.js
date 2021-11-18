@@ -17,14 +17,13 @@ const verifyToken = (req, res, next) => {
     const [scheme, token] = parts;
 
     if (!/^Bearer$/i.test(scheme)) {
-      throw new ErrorHandler(401, 'Token mal formatted');
+      throw new ErrorHandler(401, 'Token Error');
     }
 
     jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
       if (err) {
         throw new ErrorHandler(401, 'Invalid token');
       }
-      console.log(decoded);
       req.user = decoded.user.id;
     });
     next();

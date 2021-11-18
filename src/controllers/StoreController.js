@@ -5,7 +5,6 @@ class StoreController {
     const { name, description, status, openedAt, closedAt, addressId } =
       req.body;
     const merchantId = req.user;
-    console.log(merchantId);
     try {
       const store = await StoreService.create(
         name,
