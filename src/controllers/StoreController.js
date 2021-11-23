@@ -2,15 +2,9 @@ import StoreService from '../services/StoreService';
 
 class StoreController {
   async create(req, res, next) {
-    const {
-      name,
-      description,
-      status,
-      openedAt,
-      closedAt,
-      merchantId,
-      addressId,
-    } = req.body;
+    const { name, description, status, openedAt, closedAt, addressId } =
+      req.body;
+    const merchantId = req.user;
     try {
       const store = await StoreService.create(
         name,

@@ -40,14 +40,12 @@ class MerchantRepository {
     }
   }
 
-  async update(updatedMerchant) {
+  async update(id, updatedMerchant) {
     try {
-      const { name, username, email, id } = updatedMerchant;
-      const updatedMerchant = await MerchantModel.update(
-        { name, username, email },
-        { where: { id } }
-      );
-      return updatedMerchant;
+      const merchant = await MerchantModel.update(updatedMerchant, {
+        where: { id },
+      });
+      return merchant;
     } catch (err) {
       throw new ErrorHandler(500, 'Something went wrong');
     }
