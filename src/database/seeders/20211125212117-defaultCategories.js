@@ -1,7 +1,7 @@
 export default {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
-      'foodCategories',
+      'categories',
       [
         { name: 'Snack', createdAt: new Date(), updatedAt: new Date() },
         { name: 'Dessert', createdAt: new Date(), updatedAt: new Date() },
@@ -12,6 +12,6 @@ export default {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('foodCategories', null, {});
+    await queryInterface.bulkDelete('categories', null, {});
   },
 };
