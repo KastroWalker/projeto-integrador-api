@@ -46,6 +46,16 @@ export default {
         type: Sequelize.DataTypes.BOOLEAN,
         allowNull: false,
       },
+
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DataTypes.DATE,
+      },
+
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DataTypes.DATE,
+      },
     });
   },
 
