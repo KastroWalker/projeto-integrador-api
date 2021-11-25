@@ -8,7 +8,7 @@ class Product extends Model {
         description: { type: DataTypes.STRING, allowNull: false },
         value: { type: DataTypes.DECIMAL(10, 2), allowNull: false },
         status: { type: DataTypes.BOOLEAN, allowNull: false },
-        discount: { type: DataTypes.FLOAT, allowNull: false },
+        discount: { type: DataTypes.FLOAT, allowNull: true },
       },
       {
         sequelize,
