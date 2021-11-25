@@ -9,5 +9,14 @@ class ProductController {
       next(error);
     }
   }
+
+  async create(req, res, next) {
+    try {
+      const product = await ProductService.create(req.body);
+      res.status(201).json(product);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 export default new ProductController();

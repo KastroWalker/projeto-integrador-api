@@ -7,7 +7,15 @@ class ProductRepository {
       const products = await ProductModel.findAll();
       return products;
     } catch (error) {
-      console.log(error);
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
+
+  async create(product) {
+    try {
+      const newProduct = await ProductModel.create(product);
+      return newProduct;
+    } catch (error) {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }

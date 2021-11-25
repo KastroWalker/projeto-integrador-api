@@ -15,6 +15,36 @@ class ProductService {
       throw error;
     }
   }
+
+  async create(product) {
+    try {
+      const {
+        name,
+        description,
+        value,
+        status,
+        discount,
+        storeId,
+        categoryId,
+      } = product;
+
+      if (
+        !name ||
+        !description ||
+        !value ||
+        !status ||
+        !storeId ||
+        !categoryId
+      ) {
+        throw new ErrorHandler(400, 'Invalid product data');
+      }
+      const newProduct = await ProductRepository.create(product);
+
+      return newProduct;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new ProductService();
