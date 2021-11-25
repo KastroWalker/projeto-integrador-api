@@ -22,6 +22,7 @@ class Store extends Model {
     });
     this.belongsTo(models.Merchant, { foreignKey: 'merchantId', as: 'owner' });
     this.belongsTo(models.Address, { foreignKey: 'addressId', as: 'address' });
+    this.hasMany(models.Product, { foreignKey: 'storeId', as: 'products' });
   }
 }
 
