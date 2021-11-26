@@ -24,7 +24,7 @@ const verifyToken = (req, res, next) => {
       if (err) {
         throw new ErrorHandler(401, 'Invalid token');
       }
-      req.user = decoded.user.id;
+      req.user = decoded.user;
     });
     next();
   } catch (error) {
