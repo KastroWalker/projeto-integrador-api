@@ -18,15 +18,7 @@ class ProductService {
 
   async create(product) {
     try {
-      const {
-        name,
-        description,
-        value,
-        status,
-        discount,
-        storeId,
-        categoryId,
-      } = product;
+      const { name, description, value, status, storeId, categoryId } = product;
 
       if (
         !name ||
@@ -76,6 +68,31 @@ class ProductService {
       }
 
       return products;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async update(id, product) {
+    const { name, description, value, status, storeId, categoryId } = product;
+    try {
+      if (
+        !name ||
+        !description ||
+        !value ||
+        !status ||
+        !storeId ||
+        !categoryId
+      ) {
+        throw new ErrorHandler(400, 'Invalid product data');
+      }
+
+      const rows = await ProductRepository.update(id, product);
+      if (rows === 0) {
+        throw new ErrorHandler(404, 'Product not found');
+      }
+
+      return product;
     } catch (error) {
       throw error;
     }

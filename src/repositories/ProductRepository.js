@@ -44,6 +44,17 @@ class ProductRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async update(id, product) {
+    try {
+      const rows = await ProductModel.update(product, {
+        where: { id },
+      });
+      return rows[0];
+    } catch (error) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new ProductRepository();

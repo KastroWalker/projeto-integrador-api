@@ -36,5 +36,14 @@ class ProductController {
       next(error);
     }
   }
+
+  async update(req, res, next) {
+    try {
+      const product = await ProductService.update(req.params.id, req.body);
+      res.status(200).json(product);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 export default new ProductController();
