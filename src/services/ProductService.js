@@ -62,6 +62,24 @@ class ProductService {
       throw error;
     }
   }
+
+  async getByStore(storeId) {
+    try {
+      if (!storeId) {
+        throw new ErrorHandler(400, 'Store id is required');
+      }
+
+      const products = await ProductRepository.getByStore(storeId);
+
+      if (products.length === 0) {
+        throw new ErrorHandler(404, 'Products not found');
+      }
+
+      return products;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new ProductService();

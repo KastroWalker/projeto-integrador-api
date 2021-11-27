@@ -27,5 +27,14 @@ class ProductController {
       next(error);
     }
   }
+
+  async getByStore(req, res, next) {
+    try {
+      const products = await ProductService.getByStore(req.params.storeId);
+      res.status(200).json(products);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 export default new ProductController();
