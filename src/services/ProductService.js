@@ -97,6 +97,24 @@ class ProductService {
       throw error;
     }
   }
+
+  async getById(id) {
+    try {
+      if (!id) {
+        throw new ErrorHandler(400, 'Id is required');
+      }
+
+      const product = await ProductRepository.getById(id);
+
+      if (!product) {
+        throw new ErrorHandler(404, 'Product not found');
+      }
+
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new ProductService();

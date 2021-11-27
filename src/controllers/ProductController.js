@@ -45,5 +45,14 @@ class ProductController {
       next(error);
     }
   }
+
+  async getById(req, res, next) {
+    try {
+      const product = await ProductService.getById(req.params.id);
+      res.status(200).json(product);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 export default new ProductController();

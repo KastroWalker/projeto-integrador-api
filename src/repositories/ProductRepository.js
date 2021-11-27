@@ -55,6 +55,17 @@ class ProductRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async getById(id) {
+    try {
+      const product = await ProductModel.findOne({
+        where: { id },
+      });
+      return product;
+    } catch (error) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new ProductRepository();
