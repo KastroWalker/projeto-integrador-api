@@ -45,6 +45,23 @@ class ProductService {
       throw error;
     }
   }
+
+  async delete(id) {
+    try {
+      if (!id) {
+        throw new ErrorHandler(400, 'Id is required');
+      }
+      const rows = await ProductRepository.delete(id);
+
+      if (rows === 0) {
+        throw new ErrorHandler(404, 'Product not found');
+      }
+
+      return { success: 'Product deleted' };
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new ProductService();

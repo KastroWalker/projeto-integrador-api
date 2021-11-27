@@ -19,6 +19,20 @@ class ProductRepository {
       throw new ErrorHandler(500, 'Something went wrong');
     }
   }
+
+  async delete(id) {
+    try {
+      if (!id) {
+        throw new ErrorHandler(400, 'Id is required');
+      }
+      const rows = await ProductModel.destroy({
+        where: { id },
+      });
+      return rows;
+    } catch (error) {
+      throw new ErrorHandler(500, 'Something went wrong');
+    }
+  }
 }
 
 export default new ProductRepository();

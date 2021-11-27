@@ -18,5 +18,14 @@ class ProductController {
       next(error);
     }
   }
+
+  async delete(req, res, next) {
+    try {
+      const message = await ProductService.delete(req.params.id);
+      res.status(200).json(message);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 export default new ProductController();
