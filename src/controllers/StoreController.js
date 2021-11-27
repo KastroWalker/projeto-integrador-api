@@ -2,20 +2,11 @@ import StoreService from '../services/StoreService';
 
 class StoreController {
   async create(req, res, next) {
-    const { name, description, status, openedAt, closedAt, addressId } =
-      req.body;
-    const merchantId = req.user;
+    const { id: merchantId, type } = req.user;
+    const store = { ...req.body, merchantId, type };
     try {
-      const store = await StoreService.create(
-        name,
-        description,
-        status,
-        openedAt,
-        closedAt,
-        merchantId,
-        addressId
-      );
-      res.status(201).json(store);
+      const newStore = await StoreService.create(store);
+      res.status(201).json(newStore);
     } catch (error) {
       next(error);
     }
@@ -44,7 +35,7 @@ class StoreController {
     const { id } = req.params;
     const store = req.body;
     try {
-      const updatedStore = await StoreService.update(id, store);
+      await StoreService.update(id, store);
       res.status(200).json(store);
     } catch (error) {
       next(error);
