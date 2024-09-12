@@ -2,15 +2,17 @@ import { ErrorHandler } from '../helpers/ErrorHandler';
 import StoreRepository from '../repositories/StoreRepository';
 
 class StoreService {
-  async create(
-    name,
-    description,
-    status,
-    openedAt,
-    closedAt,
-    merchantId,
-    addressId
-  ) {
+  async create(store) {
+    const {
+      name,
+      description,
+      status,
+      openedAt,
+      closedAt,
+      merchantId,
+      addressId,
+      type,
+    } = store;
     try {
       if (
         !name ||
@@ -18,9 +20,14 @@ class StoreService {
         !status ||
         !openedAt ||
         !closedAt ||
-        !merchantId
+        !merchantId ||
+        !type
       ) {
         throw new ErrorHandler(400, 'Invalid store data');
+      }
+
+      if (type !== 'merchant') {
+        throw new ErrorHandler(401, 'You are not a merchant');
       }
 
       const store = await StoreRepository.create({

@@ -148,8 +148,13 @@ class MerchantService {
 
       delete merchant.password;
 
-      const token = jwt.sign({ user: merchant }, process.env.SECRET_KEY, {
-        expiresIn: 300,
+      const user = {
+        id: merchant.id,
+        type: 'merchant',
+      };
+
+      const token = jwt.sign({ user }, process.env.SECRET_KEY, {
+        expiresIn: 3000,
       });
 
       return token;
